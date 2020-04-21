@@ -1,0 +1,9 @@
+FULL_PATH=$1
+FPS=$2
+
+FILENAME="${FULL_PATH%.*}"
+FILENAME_NO_EXT="${FILENAME%%.*}"
+
+echo $FULL_PATH
+mkdir $FILENAME_NO_EXT
+ffmpeg -i $FULL_PATH -vf fps=$FPS $FILENAME_NO_EXT/frame-%5d.png
