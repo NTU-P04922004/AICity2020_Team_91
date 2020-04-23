@@ -33,7 +33,7 @@ def analyze_roi(in_image_dir_path, out_dir_path, fps_scale=5, thre=1):
 
 if __name__ == '__main__':
     parser = ArgumentParser()
-    parser.add_argument("image_dir_path", help="Path of foreground image directory")
+    parser.add_argument("image_dir_path", help="Path to foreground image directory")
     parser.add_argument("out_dir_path", help="Path for storing the result ROI mask")
     args = parser.parse_args()
 
