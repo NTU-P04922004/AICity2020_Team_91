@@ -11,8 +11,7 @@ from detectron2.config import get_cfg
 from detectron2.data.datasets import coco, register_coco_instances
 from detectron2.engine import DefaultPredictor
 
-IMG_FORMAT = "png"
-IMG_NAME_FORMAT = "frame-%05d.png"
+from constants import IMG_FORMAT, IMG_NAME_FORMAT
 
 
 def detect_cars(image_dir_path,
@@ -79,19 +78,15 @@ if __name__ == '__main__':
     parser.add_argument("model_weight_path", help="Path to pretrained car detection model")
     args = parser.parse_args()
 
-    MODEL_WEIGHT_PATH = args.model_weight_path
-    MASK_BASE_PATH = args.mask_base_path
-
     cfg = get_cfg()
     cfg.merge_from_file(model_zoo.get_config_file("Misc/cascade_mask_rcnn_R_50_FPN_3x.yaml"))
-    # cfg.MODEL.ROI_HEADS.BATCH_SIZE_PER_IMAGE = 128
     cfg.MODEL.ROI_HEADS.NUM_CLASSES = 1
     cfg.MODEL.MASK_ON = False
-    cfg.MODEL.WEIGHTS = os.path.join(MODEL_WEIGHT_PATH)
+    cfg.MODEL.WEIGHTS = args.model_weight_path
     cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.7
 
     vid_name = os.path.basename(args.image_dir_path)
-    mask_img_path = os.path.join(MASK_BASE_PATH, vid_name, "mask.png")
+    mask_img_path = os.path.join(args.mask_base_path, vid_name, "mask.png")
     predictor = DefaultPredictor(cfg)
     detection_list = detect_cars(args.image_dir_path, mask_img_path, predictor)
 

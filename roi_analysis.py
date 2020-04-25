@@ -4,11 +4,10 @@ from argparse import ArgumentParser
 import cv2
 import numpy as np
 
-ORIGINAL_FPS = 30
-FRAME_FPS = 5
-FPS_SCALE = ORIGINAL_FPS // FRAME_FPS
-START_FRAME_IDX=300
-END_FRAME_IDX=6300
+from constants import ORIGINAL_FPS, FPS_SCALE
+
+START_FRAME_IDX = 10 * ORIGINAL_FPS
+END_FRAME_IDX = 210 * ORIGINAL_FPS
 
 
 def analyze_roi(in_image_dir_path, out_dir_path, fps_scale=5, thre=1):
