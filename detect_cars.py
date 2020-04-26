@@ -75,14 +75,14 @@ if __name__ == '__main__':
     parser.add_argument("image_dir_path", help="Path to background image directory")
     parser.add_argument("mask_base_path", help="Path to ROI mask")
     parser.add_argument("out_base_path", help="Path to store detection result")
-    parser.add_argument("model_weight_path", help="Path to pretrained car detection model")
+    parser.add_argument("pretrained_model_path", help="Path to pretrained car detection model")
     args = parser.parse_args()
 
     cfg = get_cfg()
     cfg.merge_from_file(model_zoo.get_config_file("Misc/cascade_mask_rcnn_R_50_FPN_3x.yaml"))
     cfg.MODEL.ROI_HEADS.NUM_CLASSES = 1
     cfg.MODEL.MASK_ON = False
-    cfg.MODEL.WEIGHTS = args.model_weight_path
+    cfg.MODEL.WEIGHTS = args.pretrained_model_path
     cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.7
 
     vid_name = os.path.basename(args.image_dir_path)
@@ -90,5 +90,8 @@ if __name__ == '__main__':
     predictor = DefaultPredictor(cfg)
     detection_list = detect_cars(args.image_dir_path, mask_img_path, predictor)
 
-    out_file_path = os.path.join(args.out_base_path, "bg_test_%s.txt" % vid_name)
+    out_dir_path = os.path.join(args.out_base_path, "bg_detections")
+    if not os.path.exists(out_dir_path):
+        os.mkdir(out_dir_path)
+    out_file_path = os.path.join(out_dir_path, "bg_test_%s.txt" % vid_name)
     save_detection_result(detection_list, out_file_path)
