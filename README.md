@@ -11,7 +11,7 @@
 
 ## Training car detector
 
-Facebook's [Detectron2](https://github.com/facebookresearch/detectron2) is used to train a car detector. The training data is the offical challenge track #4 training data. Since there is no car bounding box labels for the training data, a pretrained car detector from the winner of 2019 AI City Challenge (refer to reference #1 below) is used to predict pseudo car bounding box labels. Finally, the pseudo labels are used as ground truths to train the car detector.
+Facebook's [Detectron2](https://github.com/facebookresearch/detectron2) is used to train a car detector. The training data is the official challenge track #4 training data. Since there is no car bounding box labels for the training data, a pretrained car detector from the winner of the 2019 AI City Challenge (refer to reference #1 below) is used to predict pseudo car bounding box labels. Finally, the pseudo labels are used as ground truths to train the car detector.
 
 The pre-trained models can be found here:
 https://drive.google.com/open?id=1lw7ozQ6khVp01EQBytCdDTEXewUBAJaQ
@@ -33,7 +33,7 @@ Generating ground truths for training a car detector
 
 ## Background and foreground analysis
 
-In this stage, static backgrounds and dynamic foregrounds for each frame in a video will be extracted. Static backgrounds are objects remain static for a long duration in the video while foregrounds are objects constantly moving in the video.
+In this stage, static backgrounds and dynamic foregrounds for each frame in a video will be extracted. Static backgrounds are objects that remain static for a long duration in the video while foregrounds are objects constantly moving in the video.
 
 OpenCV's Gaussian Mixture-based method (BackgroundSubtractorMOG2) is used to model backgrounds and foregrounds in a video.
 
@@ -47,11 +47,11 @@ In this stage, a pretrained car detector is used to detect all cars in the backg
 
 ## Anomaly detection
 
-In this stage, we want to analyze the car detection results from stage 4 and find out stalled cars. A backtracking algorithm is used figure out the start and end times of anomaly events in a video.
+In this stage, we want to analyze the car detection results from stage 4 and find out stalled cars. A backtracking algorithm is used to figure out the start and end times of anomaly events in a video.
 
 ## Reproduce challenge result
 
-* Setup worksapce
+* Setup workspace
   * Create a workspace directory, for example, "```workspace```"
   * Put all test video files under the workspace directory
 * Modify variables in ```bash.sh```
@@ -60,7 +60,7 @@ In this stage, we want to analyze the car detection results from stage 4 and fin
   * ```END_IDX```: index of the last video file
   * ```PRETRAINED_MODEL_PATH```: path to the pretrained car detection model
 * Run ```bash.sh```
-* After running ```bash.sh```, the challenge result will be save as ```result.txt```
+* After running ```bash.sh```, the challenge result will be saved as ```result.txt```
 
 ## References
 
