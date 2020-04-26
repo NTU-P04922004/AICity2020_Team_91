@@ -9,19 +9,6 @@
 * ```PyTorch v1.3.1```
 * ```Detectron2 v0.1.1```
 
-## Training car detector
-
-Facebook's [Detectron2](https://github.com/facebookresearch/detectron2) is used to train a car detector. The training data is the official challenge track #4 training data. Since there is no car bounding box labels for the training data, a pretrained car detector from the winner of the 2019 AI City Challenge (refer to reference #1 below) is used to predict pseudo car bounding box labels. Finally, the pseudo labels are used as ground truths to train the car detector.
-
-The pre-trained models can be found here:
-https://drive.google.com/open?id=1lw7ozQ6khVp01EQBytCdDTEXewUBAJaQ
-
-The car bounding box labels for all test videos can be found here:
-https://drive.google.com/open?id=13JHYxBHmNHXQQn3-cNzBbJ8kQr-0rQuF
-
-### Generating ground truth for training a car detector
-
-Generating ground truths for training a car detector
 
 ## Pipeline
 
@@ -44,6 +31,16 @@ In this stage, ROIs in a video will be generated as a binary mask. The ROIs are 
 ## Car detection
 
 In this stage, a pretrained car detector is used to detect all cars in the background images of a video (generated in stage 2). The ROI mask generated from stage 3 will be used to filter false positives.
+
+### Training car detector
+
+Facebook's [Detectron2](https://github.com/facebookresearch/detectron2) is used to train a car detector. The training data is the official challenge track #4 training data. Since there is no car bounding box labels for the training data, a pretrained car detector from the winner of the 2019 AI City Challenge (refer to reference #1 below) is used to predict pseudo car bounding box labels. Finally, the pseudo labels are used as ground truths to train the car detector.
+
+The pre-trained models can be found here:
+https://drive.google.com/open?id=1lw7ozQ6khVp01EQBytCdDTEXewUBAJaQ
+
+The car bounding box labels for all test videos can be found here:
+https://drive.google.com/open?id=13JHYxBHmNHXQQn3-cNzBbJ8kQr-0rQuF
 
 ## Anomaly detection
 
